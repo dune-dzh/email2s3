@@ -1,0 +1,39 @@
+# Dependencies – avoid copying into image; install in container or use cached layer
+/vendor
+/node_modules
+
+# Git and IDE
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Env and secrets (use mount or build args)
+.env
+.env.*
+!.env.example
+
+# Build and cache
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+!.gitkeep
+
+# Tests and docs (not needed in runtime image)
+/tests
+/phpunit.xml
+.phpunit.result.cache
+*.md
+!README.md
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+/assets
