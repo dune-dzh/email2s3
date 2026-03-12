@@ -197,6 +197,10 @@
             padding-left: clamp(0.5rem, 1.2vw, 0.7rem);
             padding-right: clamp(0.5rem, 1.2vw, 0.7rem);
         }
+        .emails-list-partial th:nth-child(6),
+        .emails-list-partial td:nth-child(6) {
+            padding-right: clamp(0.75rem, 2vw, 1rem);
+        }
         .emails-list-partial th:last-child,
         .emails-list-partial td:last-child {
             border-right: none;
@@ -242,9 +246,8 @@
             border-color: #22c55e;
         }
         .attachments-cell {
-            max-width: min(180px, 40vw);
             font-size: 0.75rem;
-            overflow: hidden;
+            word-break: break-word;
         }
         .attachment-list {
             list-style: none;
@@ -257,11 +260,7 @@
         .attachment-link {
             color: var(--accent);
             text-decoration: none;
-            display: inline-block;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            word-break: break-word;
         }
         .attachment-link:hover {
             text-decoration: underline;

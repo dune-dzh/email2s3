@@ -81,7 +81,7 @@
                                     <a href="{{ route('emails.attachments.download', ['email' => $email->id, 'file' => $fileId]) }}"
                                        class="attachment-link"
                                        title="{{ $info['name'] }} ({{ number_format($info['size'] / 1024, 1) }} KB)">
-                                        {{ \Illuminate\Support\Str::limit($info['name'], 20) }}
+                                        {{ $info['name'] }}
                                     </a>
                                     <span class="attachment-source">{{ $isMigrated ? 'S3' : 'local' }}</span>
                                 </li>
