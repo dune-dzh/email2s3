@@ -28,22 +28,25 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: clamp(0.75rem, 3vw, 1.5rem);
+            min-width: 0;
         }
         h1 {
-            font-size: 1.8rem;
+            font-size: clamp(1.35rem, 4vw, 1.8rem);
             margin-bottom: 0.25rem;
+            word-break: break-word;
         }
         .subtitle {
             color: var(--muted);
             margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
         }
         .layout {
             display: grid;
             grid-template-columns: 2fr minmax(18rem, max-content);
-            gap: 1.5rem;
+            gap: clamp(1rem, 2vw, 1.5rem);
             align-items: start;
+            min-width: 0;
         }
         @media (max-width: 960px) {
             .layout {
@@ -52,14 +55,17 @@
         }
         .card {
             background: var(--bg-card);
-            border-radius: 1rem;
+            border-radius: clamp(0.75rem, 2vw, 1rem);
             border: 1px solid var(--border);
-            padding: 1.25rem 1.5rem;
+            padding: clamp(0.75rem, 2.5vw, 1.25rem) clamp(1rem, 3vw, 1.5rem);
+            min-width: 0;
         }
         .card-header {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            gap: 0.5rem;
             margin-bottom: 1rem;
         }
         .card-header h2 {
@@ -92,6 +98,11 @@
         @media (max-width: 960px) {
             form {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 480px) {
+            form {
+                grid-template-columns: 1fr;
             }
         }
         .field {
@@ -134,10 +145,11 @@
         .field-actions {
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             gap: 0.5rem;
             justify-content: flex-end;
             align-items: center;
+            grid-column: 1 / -1;
         }
         .btn-clear {
             display: inline-block;
@@ -155,15 +167,21 @@
             color: var(--text);
             border-color: var(--text);
         }
+        .table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
+            min-width: 0;
+        }
         table {
             width: 100%;
+            min-width: 600px;
             border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.8rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
         }
         th,
         td {
-            padding: 0.55rem 0.5rem;
+            padding: clamp(0.4rem, 1vw, 0.55rem) clamp(0.35rem, 1vw, 0.5rem);
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
@@ -195,7 +213,7 @@
             border-color: #22c55e;
         }
         .attachments-cell {
-            max-width: 180px;
+            max-width: min(180px, 40vw);
             font-size: 0.75rem;
         }
         .attachment-list {
@@ -250,12 +268,27 @@
         .body-viewer-modal {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 1rem;
-            max-width: 90vw;
+            border-radius: clamp(0.5rem, 2vw, 1rem);
+            max-width: min(800px, 95vw);
+            width: 95vw;
             max-height: 90vh;
-            width: 800px;
+            height: 90vh;
             display: flex;
             flex-direction: column;
+            min-width: 0;
+        }
+        @media (max-width: 480px) {
+            .body-viewer-overlay {
+                padding: 0;
+                align-items: stretch;
+            }
+            .body-viewer-modal {
+                width: 100%;
+                max-width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
         }
         .body-viewer-header {
             display: flex;
@@ -295,10 +328,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: clamp(0.5rem, 2vw, 1rem);
             border-bottom: 1px solid var(--border);
-            gap: 1rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .body-viewer-toggle,
+            .body-viewer-downloads {
+                flex: 1 1 auto;
+            }
         }
         .body-viewer-toggle {
             display: flex;
@@ -339,10 +378,16 @@
         }
         .body-viewer-content-wrap {
             flex: 1;
-            min-height: 300px;
+            min-height: 200px;
             max-height: 60vh;
             overflow: auto;
-            padding: 1rem;
+            padding: clamp(0.5rem, 2vw, 1rem);
+            -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 480px) {
+            .body-viewer-content-wrap {
+                max-height: none;
+            }
         }
         .body-viewer-iframe {
             width: 100%;
@@ -368,16 +413,16 @@
         .pagination {
             display: flex;
             justify-content: flex-end;
+            flex-wrap: wrap;
             gap: 0.4rem;
             margin-top: 1rem;
-            flex-wrap: wrap;
         }
         .pagination a,
         .pagination span {
-            padding: 0.25rem 0.5rem;
+            padding: clamp(0.2rem, 1vw, 0.25rem) clamp(0.35rem, 1vw, 0.5rem);
             border-radius: 0.4rem;
             border: 1px solid var(--border);
-            font-size: 0.75rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.75rem);
             color: var(--muted);
             text-decoration: none;
         }
@@ -395,7 +440,7 @@
             display: grid;
             grid-template-columns: repeat(3, minmax(5.5rem, 1fr));
             gap: 0.75rem;
-            width: max-content;
+            width: 100%;
             max-width: 100%;
         }
         @media (max-width: 700px) {
@@ -403,9 +448,14 @@
                 grid-template-columns: 1fr;
             }
         }
+        @media (min-width: 701px) and (max-width: 960px) {
+            .stat-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
         .stat {
             min-width: 0;
-            padding: 0.75rem 0.9rem;
+            padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.6rem, 1.5vw, 0.9rem);
             border-radius: 0.75rem;
             background: linear-gradient(135deg, rgba(79,70,229,0.08), #fff);
             border: 1px solid var(--border);
@@ -419,12 +469,11 @@
         }
         .stat-value {
             display: inline-block;
-            font-size: 1.05rem;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
             font-weight: 600;
             white-space: nowrap;
             word-break: keep-all;
             overflow-wrap: normal;
-            min-width: min-content;
         }
         .stat-caption {
             font-size: 0.65rem;
@@ -516,7 +565,7 @@
                     <input type="date" id="date_to" name="date_to"
                            value="{{ $filters['date_to'] ?? '' }}">
                 </div>
-                <div class="field field-actions" style="grid-column: span 4; text-align: right;">
+                <div class="field field-actions">
                     <a href="{{ route('emails.index') }}" class="btn btn-clear">Clear filters</a>
                     <button type="submit">Apply filters</button>
                 </div>

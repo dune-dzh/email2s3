@@ -5,6 +5,7 @@
     $baseQuery = request()->except('partial');
 @endphp
 <div class="emails-list-partial" data-total="{{ $emails->total() }}">
+<div class="table-wrap">
 <table>
     <thead>
     <tr>
@@ -90,6 +91,7 @@
     @endforelse
     </tbody>
 </table>
+</div>
 
 @if ($emails->hasPages())
     <div class="pagination">
