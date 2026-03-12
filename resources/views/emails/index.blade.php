@@ -190,14 +190,14 @@
             overflow-wrap: break-word;
             word-break: break-word;
         }
-        .emails-list-partial .col-id { width: 4%; }
-        .emails-list-partial .col-sender { width: 14%; }
-        .emails-list-partial .col-receiver { width: 14%; }
-        .emails-list-partial .col-subject { width: 22%; }
+        .emails-list-partial .col-id { width: 7%; }
+        .emails-list-partial .col-sender { width: 18%; }
+        .emails-list-partial .col-receiver { width: 18%; }
+        .emails-list-partial .col-subject { width: 20%; }
         .emails-list-partial .col-created { width: 14%; }
         .emails-list-partial .col-status { width: 8%; }
-        .emails-list-partial .col-attachments { width: 14%; }
-        .emails-list-partial .col-body { width: 10%; }
+        .emails-list-partial .col-attachments { width: 11%; }
+        .emails-list-partial .col-body { width: 4%; }
         th {
             color: var(--muted);
             font-weight: 500;
@@ -213,6 +213,7 @@
             border-radius: 999px;
             font-size: 0.7rem;
             border: 1px solid var(--border);
+            white-space: nowrap;
         }
         .status-pending {
             color: var(--muted);
@@ -518,10 +519,22 @@
             color: var(--muted);
             white-space: nowrap;
         }
-        th.th-sortable {
-            white-space: nowrap;
+        @media (min-width: 961px) {
+            th.th-sortable {
+                white-space: nowrap;
+            }
         }
         td.td-id {
+            white-space: nowrap;
+        }
+        @media (max-width: 700px) {
+            th.th-sortable,
+            th a.sort-link {
+                white-space: normal;
+                word-break: break-word;
+            }
+        }
+        th.th-status {
             white-space: nowrap;
         }
         th a.sort-link.active .sort-arrow {

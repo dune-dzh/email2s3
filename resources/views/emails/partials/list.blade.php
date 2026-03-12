@@ -39,7 +39,7 @@
             @php $q = array_merge($baseQuery, ['sort' => 'created_at', 'dir' => ($sort === 'created_at' && $sortDir === 'asc') ? 'desc' : 'asc']); @endphp
             <a href="{{ route('emails.index', $q) }}" class="sort-link {{ $sort === 'created_at' ? 'active' : '' }}">Created at<span class="sort-arrow">{{ $sort === 'created_at' ? ($sortDir === 'asc' ? ' ↑' : ' ↓') : '' }}</span></a>
         </th>
-        <th>Status</th>
+        <th class="th-status">Status</th>
         <th>Attachments</th>
         <th>Body</th>
     </tr>
