@@ -232,13 +232,21 @@
         .status-pill {
             display: inline-flex;
             align-items: center;
-            padding: 0.1rem 0.45rem;
+            justify-content: center;
+            padding: 0.2rem 0.6rem;
             border-radius: 999px;
             font-size: 0.7rem;
             border: 1px solid var(--border);
             white-space: nowrap;
             max-width: 100%;
             box-sizing: border-box;
+            overflow: hidden;
+        }
+        .status-pill-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
         }
         .status-pending {
             color: var(--muted);

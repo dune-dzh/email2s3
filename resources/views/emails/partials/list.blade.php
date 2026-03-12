@@ -55,11 +55,11 @@
             <td class="status-cell">
                 @php $state = (int) $email->is_migrated_s3; @endphp
                 @if($state === 2)
-                    <span class="status-pill status-migrated">Migrated</span>
+                    <span class="status-pill status-migrated"><span class="status-pill-text">Migrated</span></span>
                 @elseif($state === 1)
-                    <span class="status-pill status-migrating">Migrating</span>
+                    <span class="status-pill status-migrating"><span class="status-pill-text">Migrating</span></span>
                 @else
-                    <span class="status-pill status-pending">Pending</span>
+                    <span class="status-pill status-pending"><span class="status-pill-text">Pending</span></span>
                 @endif
             </td>
             <td class="attachments-cell">
