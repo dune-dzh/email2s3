@@ -204,15 +204,18 @@
         .emails-list-partial .col-id { width: 7%; }
         .emails-list-partial .col-sender { width: 17%; }
         .emails-list-partial .col-receiver { width: 17%; }
-        .emails-list-partial .col-subject { width: 19%; }
+        .emails-list-partial .col-subject { width: 17%; }
         .emails-list-partial .col-created { width: 14%; }
-        .emails-list-partial .col-status { width: 8%; }
+        .emails-list-partial .col-status { width: 10%; }
         .emails-list-partial .col-attachments { width: 11%; }
         .emails-list-partial .col-body { width: 7%; }
         th {
             color: var(--muted);
             font-weight: 500;
             font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         tbody tr:nth-child(even) {
             background: #f8fafc;
@@ -225,6 +228,7 @@
             font-size: 0.7rem;
             border: 1px solid var(--border);
             white-space: nowrap;
+            max-width: 100%;
         }
         .status-pending {
             color: var(--muted);
@@ -240,6 +244,7 @@
         .attachments-cell {
             max-width: min(180px, 40vw);
             font-size: 0.75rem;
+            overflow: hidden;
         }
         .attachment-list {
             list-style: none;
@@ -252,6 +257,11 @@
         .attachment-link {
             color: var(--accent);
             text-decoration: none;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .attachment-link:hover {
             text-decoration: underline;
@@ -525,6 +535,9 @@
             text-underline-offset: 2px;
             font-weight: 500;
             cursor: pointer;
+            display: inline-flex;
+            align-items: baseline;
+            max-width: 100%;
         }
         th a.sort-link:hover {
             color: #4338ca;
@@ -535,21 +548,13 @@
             color: var(--muted);
             white-space: nowrap;
         }
-        @media (min-width: 961px) {
-            th.th-sortable {
-                white-space: nowrap;
-            }
+        th.th-sortable {
+            white-space: nowrap;
         }
         td.td-id {
             white-space: nowrap;
         }
-        @media (max-width: 700px) {
-            th.th-sortable,
-            th a.sort-link {
-                white-space: normal;
-                word-break: break-word;
-            }
-        }
+        /* On narrow screens we keep headers nowrap but allow ellipsis (no horizontal scroll). */
         th.th-status {
             white-space: nowrap;
         }
