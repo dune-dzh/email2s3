@@ -323,6 +323,8 @@ Or run continuously until all emails are queued:
 php artisan emails:migrate-to-s3 --loop
 ```
 
+You only need **one** publisher process (with or without `--loop`). To speed up migration, add **more workers** (see [4.2. Start workers](#42-start-workers)).
+
 Publisher behavior:
 
 - Queries `emails` by ID in batches (default batch size 1000; configurable via `MIGRATION_PUBLISH_BATCH_SIZE`).
@@ -338,9 +340,26 @@ Workers consume from `email_migration_queue` and call `EmailMigrationService`.
 php artisan migration:worker
 ```
 
+**Start more workers (scale out):** run multiple worker processes. Each process runs one consumer. From the **project root** (the directory where `docker-compose.yml` is, e.g. where you ran `./run.sh`), run (e.g. 3 workers in the background; `&` returns the shell):
+
+```bash
+docker compose exec php-fpm bash -lc "php artisan migration:worker" &
+docker compose exec php-fpm bash -lc "php artisan migration:worker" &
+docker compose exec php-fpm bash -lc "php artisan migration:worker" &
+```
+
+Or in separate terminals for foreground:
+
+```bash
+docker compose exec php-fpm php artisan migration:worker
+# In another terminal:
+docker compose exec php-fpm php artisan migration:worker
+# etc.
+```
+
 Options:
 
-- `--workers=` (currently logged only; horizontal scaling is typically done by running multiple processes/containers).
+- `--workers=` (currently logged only; horizontal scaling is done by running multiple `migration:worker` processes as above).
 
 Worker behavior:
 
