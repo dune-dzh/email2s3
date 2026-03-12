@@ -208,10 +208,10 @@
         .emails-list-partial .col-id { width: 7%; }
         .emails-list-partial .col-sender { width: 17%; }
         .emails-list-partial .col-receiver { width: 17%; }
-        .emails-list-partial .col-subject { width: 17%; }
+        .emails-list-partial .col-subject { width: 15%; }
         .emails-list-partial .col-created { width: 14%; }
-        .emails-list-partial .col-status { width: 10%; }
-        .emails-list-partial .col-attachments { width: 11%; }
+        .emails-list-partial .col-status { width: 12%; }
+        .emails-list-partial .col-attachments { width: 10%; }
         .emails-list-partial .col-body { width: 7%; }
         th {
             color: var(--muted);
@@ -225,9 +225,7 @@
             background: #f8fafc;
         }
         .status-cell {
-            overflow: hidden;
             min-width: 0;
-            min-width: 5.5rem;
         }
         .status-pill {
             display: inline-flex;
@@ -238,15 +236,10 @@
             font-size: 0.7rem;
             border: 1px solid var(--border);
             white-space: nowrap;
-            max-width: 100%;
             box-sizing: border-box;
-            overflow: hidden;
         }
         .status-pill-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
             white-space: nowrap;
-            min-width: 0;
         }
         .status-pending {
             color: var(--muted);
