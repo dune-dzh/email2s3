@@ -31,6 +31,7 @@
             margin: 0 auto;
             padding: clamp(0.75rem, 3vw, 1.5rem);
             min-width: 0;
+            overflow-x: hidden;
         }
         h1 {
             font-size: clamp(1.35rem, 4vw, 1.8rem);
@@ -44,16 +45,16 @@
         }
         .layout {
             display: grid;
-            grid-template-columns: 2fr minmax(18rem, max-content);
+            grid-template-columns: 1fr;
             gap: clamp(1rem, 2vw, 1.5rem);
             align-items: start;
             min-width: 0;
         }
-        @media (max-width: 960px) {
+        @media (min-width: 961px) {
             .layout {
-                grid-template-columns: 1fr;
+                grid-template-columns: 2fr minmax(0, 20rem);
             }
-            .layout > .card.migration-dashboard-card {
+            .layout > .card-filters {
                 order: -1;
             }
         }
@@ -446,6 +447,12 @@
         .migration-dashboard-card {
             max-width: 100%;
             min-width: 0;
+            overflow-wrap: break-word;
+        }
+        .dashboard-caption {
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--muted);
         }
         .stat-grid {
             display: grid;
@@ -544,7 +551,43 @@
     <p class="subtitle">Search emails and monitor S3 migration progress in real time.</p>
 
     <div class="layout">
-        <div class="card">
+        <div class="card migration-dashboard-card">
+            <div class="card-header">
+                <h2>Migration dashboard</h2>
+                <div>
+                    <span class="ws-status">
+                        <span id="ws-dot" class="ws-dot"></span>
+                        <span id="ws-label">Connecting...</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat">
+                    <div class="stat-label">Migrated</div>
+                    <div id="stat-migrated" class="stat-value">{{ number_format($stats['migrated']) }}</div>
+                    <div class="stat-caption">Completed uploads</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Migrating</div>
+                    <div id="stat-migrating" class="stat-value">{{ number_format($stats['migrating']) }}</div>
+                    <div class="stat-caption">In progress</div>
+                </div>
+                <div class="stat stat-remaining">
+                    <div class="stat-label">Remaining</div>
+                    <div id="stat-remaining" class="stat-value">
+                        {{ number_format($stats['pending']) }}
+                    </div>
+                    <div class="stat-caption">
+                        Out of <span id="stat-total">{{ number_format($stats['total']) }}</span> total
+                    </div>
+                </div>
+            </div>
+
+            <p class="dashboard-caption">Stats update in real time via Laravel Reverb (every second). Shows progress while seeding and during migration.</p>
+        </div>
+
+        <div class="card card-filters">
             <div class="card-header">
                 <h2>Filters</h2>
                 <span class="pill">
@@ -585,44 +628,6 @@
             <div id="emails-list-container" data-emails-index-url="{{ route('emails.index') }}">
                 @include('emails.partials.list', ['emails' => $emails, 'fileMap' => $fileMap, 'sort' => $sort ?? 'id', 'sortDir' => $sortDir ?? 'asc'])
             </div>
-        </div>
-
-        <div class="card migration-dashboard-card">
-            <div class="card-header">
-                <h2>Migration dashboard</h2>
-                <div>
-                    <span class="ws-status">
-                        <span id="ws-dot" class="ws-dot"></span>
-                        <span id="ws-label">Connecting...</span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="stat-grid">
-                <div class="stat">
-                    <div class="stat-label">Migrated</div>
-                    <div id="stat-migrated" class="stat-value">{{ number_format($stats['migrated']) }}</div>
-                    <div class="stat-caption">Completed uploads</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Migrating</div>
-                    <div id="stat-migrating" class="stat-value">{{ number_format($stats['migrating']) }}</div>
-                    <div class="stat-caption">In progress</div>
-                </div>
-                <div class="stat stat-remaining">
-                    <div class="stat-label">Remaining</div>
-                    <div id="stat-remaining" class="stat-value">
-                        {{ number_format($stats['pending']) }}
-                    </div>
-                    <div class="stat-caption">
-                        Out of <span id="stat-total">{{ number_format($stats['total']) }}</span> total
-                    </div>
-                </div>
-            </div>
-
-            <p style="margin-top: 1rem; font-size: 0.7rem; color: var(--muted);">
-                Stats update in real time via Laravel Reverb (every second). Shows progress while seeding and during migration.
-            </p>
         </div>
     </div>
 </div>
