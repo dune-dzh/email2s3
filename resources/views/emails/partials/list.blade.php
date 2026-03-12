@@ -52,7 +52,7 @@
             <td>{{ $email->receiver_email }}</td>
             <td>{{ \Illuminate\Support\Str::limit($email->subject, 40) }}</td>
             <td>{{ $email->created_at }}</td>
-            <td>
+            <td class="status-cell">
                 @php $state = (int) $email->is_migrated_s3; @endphp
                 @if($state === 2)
                     <span class="status-pill status-migrated">Migrated</span>

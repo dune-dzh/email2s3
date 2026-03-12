@@ -224,6 +224,11 @@
         tbody tr:nth-child(even) {
             background: #f8fafc;
         }
+        .status-cell {
+            overflow: hidden;
+            min-width: 0;
+            min-width: 5.5rem;
+        }
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -233,6 +238,7 @@
             border: 1px solid var(--border);
             white-space: nowrap;
             max-width: 100%;
+            box-sizing: border-box;
         }
         .status-pending {
             color: var(--muted);
