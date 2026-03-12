@@ -187,17 +187,28 @@
             padding: clamp(0.4rem, 1vw, 0.55rem) clamp(0.35rem, 1vw, 0.5rem);
             text-align: left;
             border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
             overflow-wrap: break-word;
             word-break: break-word;
         }
+        .emails-list-partial td:nth-child(6),
+        .emails-list-partial td:nth-child(7),
+        .emails-list-partial td:nth-child(8) {
+            padding-left: clamp(0.5rem, 1.2vw, 0.7rem);
+            padding-right: clamp(0.5rem, 1.2vw, 0.7rem);
+        }
+        .emails-list-partial th:last-child,
+        .emails-list-partial td:last-child {
+            border-right: none;
+        }
         .emails-list-partial .col-id { width: 7%; }
-        .emails-list-partial .col-sender { width: 18%; }
-        .emails-list-partial .col-receiver { width: 18%; }
-        .emails-list-partial .col-subject { width: 20%; }
+        .emails-list-partial .col-sender { width: 17%; }
+        .emails-list-partial .col-receiver { width: 17%; }
+        .emails-list-partial .col-subject { width: 19%; }
         .emails-list-partial .col-created { width: 14%; }
         .emails-list-partial .col-status { width: 8%; }
         .emails-list-partial .col-attachments { width: 11%; }
-        .emails-list-partial .col-body { width: 4%; }
+        .emails-list-partial .col-body { width: 7%; }
         th {
             color: var(--muted);
             font-weight: 500;
@@ -261,6 +272,11 @@
             border-radius: 0.4rem;
             font-size: 0.75rem;
             cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 3.25rem;
         }
         .body-view-btn:hover {
             background: var(--accent);
