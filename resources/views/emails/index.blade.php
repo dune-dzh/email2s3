@@ -21,6 +21,7 @@
         }
         body {
             margin: 0;
+            overflow-x: hidden;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background: linear-gradient(to bottom right, #f1f5f9, #e2e8f0);
             color: var(--text);
@@ -51,6 +52,9 @@
         @media (max-width: 960px) {
             .layout {
                 grid-template-columns: 1fr;
+            }
+            .layout > .card.migration-dashboard-card {
+                order: -1;
             }
         }
         .card {
@@ -168,23 +172,31 @@
             border-color: var(--text);
         }
         .table-wrap {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
             margin: 1rem 0;
             min-width: 0;
         }
-        table {
+        .emails-list-partial table {
             width: 100%;
-            min-width: 600px;
+            table-layout: fixed;
             border-collapse: collapse;
             font-size: clamp(0.7rem, 1.5vw, 0.8rem);
         }
-        th,
-        td {
+        .emails-list-partial th,
+        .emails-list-partial td {
             padding: clamp(0.4rem, 1vw, 0.55rem) clamp(0.35rem, 1vw, 0.5rem);
             text-align: left;
             border-bottom: 1px solid var(--border);
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
+        .emails-list-partial .col-id { width: 4%; }
+        .emails-list-partial .col-sender { width: 14%; }
+        .emails-list-partial .col-receiver { width: 14%; }
+        .emails-list-partial .col-subject { width: 22%; }
+        .emails-list-partial .col-created { width: 14%; }
+        .emails-list-partial .col-status { width: 8%; }
+        .emails-list-partial .col-attachments { width: 14%; }
+        .emails-list-partial .col-body { width: 10%; }
         th {
             color: var(--muted);
             font-weight: 500;
@@ -432,9 +444,8 @@
             border-color: transparent;
         }
         .migration-dashboard-card {
-            width: fit-content;
             max-width: 100%;
-            min-width: min-content;
+            min-width: 0;
         }
         .stat-grid {
             display: grid;

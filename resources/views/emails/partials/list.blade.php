@@ -7,6 +7,16 @@
 <div class="emails-list-partial" data-total="{{ $emails->total() }}">
 <div class="table-wrap">
 <table>
+    <colgroup>
+        <col class="col-id">
+        <col class="col-sender">
+        <col class="col-receiver">
+        <col class="col-subject">
+        <col class="col-created">
+        <col class="col-status">
+        <col class="col-attachments">
+        <col class="col-body">
+    </colgroup>
     <thead>
     <tr>
         <th class="th-sortable">
