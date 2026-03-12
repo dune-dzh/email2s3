@@ -16,10 +16,14 @@ class EmailSeeder
 
         $faker = FakerFactory::create();
 
-        $attachmentsDir = storage_path('app/email_attachments');
-        if (! File::exists($attachmentsDir)) {
-            File::makeDirectory($attachmentsDir, 0775, true);
+        $baseDir = storage_path('app/email_attachments');
+        if (! File::exists($baseDir)) {
+            File::makeDirectory($baseDir, 0775, true);
         }
+
+        $runId = 'run_' . date('Ymd_His') . '_' . bin2hex(random_bytes(4));
+        $attachmentsDir = $baseDir . DIRECTORY_SEPARATOR . $runId;
+        File::makeDirectory($attachmentsDir, 0775, true);
 
         $extensions = ['doc', 'pdf', 'ppt', 'txt', 'csv'];
         $namePrefixes = ['invoice', 'report', 'document', 'statement', 'contract', 'summary', 'data_export', 'presentation', 'attachment', 'letter', 'form'];
@@ -27,9 +31,14 @@ class EmailSeeder
         $totalBatches = (int) ceil($records / $emailsPerBatch);
 
         for ($batch = 0; $batch < $totalBatches; $batch++) {
+            $batchSubdir = $attachmentsDir . DIRECTORY_SEPARATOR . 'batch_' . $batch;
+            if (! File::exists($batchSubdir)) {
+                File::makeDirectory($batchSubdir, 0775, true);
+            }
+
             DB::transaction(function () use (
                 $faker,
-                $attachmentsDir,
+                $batchSubdir,
                 $extensions,
                 $namePrefixes,
                 $emailsPerBatch,
@@ -49,9 +58,9 @@ class EmailSeeder
                         $fileSize = random_int(10 * 1024, 1024 * 1024);
 
                         $prefix = $namePrefixes[array_rand($namePrefixes)];
-                        $uniqueNum = $startIndex * 10 + $i * 3 + $j;
+                        $uniqueNum = $i * 3 + $j;
                         $filename = $prefix . '_' . $uniqueNum . '.' . $ext;
-                        $filePath = $attachmentsDir . DIRECTORY_SEPARATOR . $filename;
+                        $filePath = $batchSubdir . DIRECTORY_SEPARATOR . $filename;
 
                         $data = self::generateFileContent($ext, $fileSize);
                         file_put_contents($filePath, $data);
