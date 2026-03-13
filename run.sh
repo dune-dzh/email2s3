@@ -192,6 +192,6 @@ echo "  .env is configured for this server. To override (e.g. behind LB): PUBLIC
 echo "  If connection refused: open ports 8080 and 6001 on the server firewall."
 echo "  Optional: to seed data, run in another terminal:  docker compose exec php-fpm php artisan emails:seed --records=100000"
 echo "  (WebSocket shows progress during seeding and during migration.)"
-echo "  To view logs:                        docker compose logs -f php-fpm"
+echo "  To view Laravel log (storage/logs/laravel.log):  docker exec email2s3_php tail -f storage/logs/laravel.log"
 echo ""
 

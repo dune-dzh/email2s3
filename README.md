@@ -116,7 +116,19 @@ On a fresh clone, from the project root:
    - MinIO console: `http://localhost:9001`
    - RabbitMQ management UI: `http://localhost:15672`
 
-4. **Access from outside the host**
+4. **Viewing Laravel logs**
+
+   To follow the application log file (`storage/logs/laravel.log`) inside the PHP container, use the **container name** `email2s3_php` (works from any directory):
+
+   ```bash
+   docker exec email2s3_php tail -f storage/logs/laravel.log
+   ```
+
+   Alternatively, from the **project root** (where `docker-compose.yml` is):  
+   `docker compose exec php-fpm tail -f storage/logs/laravel.log`  
+   (`docker compose logs php-fpm` only shows container stdout/stderr, not the Laravel log file.)
+
+5. **Access from outside the host**
 
    Nginx and Reverb are bound to **0.0.0.0** (all IPv4 interfaces) on ports **8080** and **6001**, so the web UI can be reached from other machines at `http://YOUR_SERVER_IP:8080`.
 
@@ -138,7 +150,7 @@ On a fresh clone, from the project root:
    - **Host firewall:** allow TCP **8080**, **6001**, and **9000** (see [Ports to open](#ports-to-open-firewall--security-group) above). Example: `ufw allow 8080/tcp && ufw allow 6001/tcp && ufw allow 9000/tcp && ufw reload`.
    - **Cloud / VM:** open ports **8080**, **6001**, and **9000** in the instance’s security group or network ACL.
 
-5. **Debugging HTTP 500**
+6. **Debugging HTTP 500**
 
    If you see a generic "HTTP ERROR 500" with no details:
 
